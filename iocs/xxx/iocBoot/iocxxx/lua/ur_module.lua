@@ -1,3 +1,6 @@
+local script_dir = debug.getinfo(1, "S").source:match("@(.*/)")
+package.path = script_dir .. "?.lua;" .. package.path
+
 epics = require("epics")
 json = require("lunajson")
 
@@ -7,23 +10,6 @@ local function urlencode(str)
     end))
 end
 
--- function test()
-    -- local openval = true
-    -- local closeval = false
---
-    -- local url = "http://localhost:3030/action?action_name=toggle_gripper"
-    -- local action_vars = {
-        -- open = openval,
-        -- close = closeval,
-    -- }
---
-    -- local json_args = json.encode(action_vars)
-    -- local encoded_args = urlencode(json_args)
---
-    -- local full_url = url .. "&args=" .. encoded_args .. "\n\n"
-    -- return full_url
--- end
-
 function string_to_table(str)
     local chars = {}
     for i = 1, #str do
@@ -32,22 +18,32 @@ function string_to_table(str)
     return chars
 end
 
-function test()
-    local openval = true
-    local closeval = false
+function get_url_toggle_gripper()
+    epics.put("xxx:HTTPMethod", 2)
+    local openval
+    local closeval
+
+    if A == 1 then
+        print("Getting url for closing gripper")
+        openval = false
+        closeval = true
+    else
+        print("Getting url for opening gripper")
+        openval = true
+        closeval = false
+    end
 
     local url = "http://localhost:3030/action?action_name=toggle_gripper"
     local action_vars = {
         open = openval,
         close = closeval,
     }
-
     local json_args = json.encode(action_vars)
     local encoded_args = urlencode(json_args)
+    full_url = url .. "&args=" .. encoded_args
 
-    full_url = url .. "&args=" .. encoded_args .. "\n\n"
-    io.write("Full URL: ")
+    io.write("URL: ")
     print(full_url)
-    -- return string_to_table("Hello world this is a long string that is longer than you might usually be allowed to do")
+
     return string_to_table(full_url)
 end

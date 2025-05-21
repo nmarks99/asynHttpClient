@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "" == "${EPICS_CA_MAX_ARRAY_BYTES}" ]; then
+    #export EPICS_CA_MAX_ARRAY_BYTES=64008
+    export EPICS_CA_MAX_ARRAY_BYTES=8000100
+fi
+echo "Using EPICS_CA_MAX_ARRAY_BYTES = ${EPICS_CA_MAX_ARRAY_BYTES}"
+
+/APSshare/bin/caQtDM -macro "P=xxx:" ur_module.ui
