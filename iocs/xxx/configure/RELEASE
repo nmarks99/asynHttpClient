@@ -7,6 +7,8 @@ ASYN_HTTP_CLIENT=$(TOP)/../../
 -include $(ASYN_HTTP_CLIENT)/configure/RELEASE
 -include $(ASYN_HTTP_CLIENT)/configure/RELEASE.local
 
+LUA=
+
 # These lines allow developers to override these RELEASE settings
 # without having to modify this file directly.
 -include $(TOP)/../RELEASE.local
