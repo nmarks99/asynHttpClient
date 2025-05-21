@@ -1,15 +1,31 @@
 record(lso, "$(P)FullURL") {
     field(DTYP, "asynOctetWrite")
     field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))FULL_URL")
-    field(SIZV, 32767)
+    field(SIZV, 2048)
 }
 
 record(mbbo, "$(P)HTTPMethod") {
+    field(VAL, 0)
+    field(PINI, 1)
     field(DTYP, "asynInt32")
-    field(ZRST, "POST")
-    field(ONST, "GET")
+    field(ZRST, "GET")
+    field(ONST, "HEAD")
+    field(TWST, "POST")
+    field(THST, "PUT")
+    field(FRST, "DELETE")
+    field(FVST, "CONNECT")
+    field(SXST, "OPTIONS")
+    field(SVST, "TRACE")
+    field(EIST, "PATCH")
     field(ZRVL, 0)
     field(ONVL, 1)
+    field(TWVL, 2)
+    field(THVL, 3)
+    field(FRVL, 4)
+    field(FVVL, 5)
+    field(SXVL, 6)
+    field(SVVL, 7)
+    field(EIVL, 8)
     field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))HTTP_METHOD")
 }
 
@@ -24,9 +40,31 @@ record(longin, "$(P)StatusCode") {
     field(SCAN, "I/O Intr")
 }
 
-record(lsi, "$(P)ResponseJSON") {
+record(lsi, "$(P)Response") {
     field(DTYP, "asynOctetRead")
     field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE")
     field(SIZV, 32767)
     field(SCAN, "I/O Intr")
+}
+
+record(bo, "$(P)ResponseFormat") {
+    field(DTYP, "asynInt32")
+    field(ZNAM, "Raw")
+    field(ONAM, "JSON")
+    field(VAL, 0)
+    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE_FORMAT")
+}
+
+# Records for combined setting HTTP method and sending the request
+#
+record(longout, "$(P)POSTExec") {
+    field(VAL, 2)
+    field(OUT, "$(P)HTTPMethod.VAL PP NMS")
+    field(FLNK, "$(P)Execute.PROC")
+}
+
+record(longout, "$(P)GETExec") {
+    field(VAL, 0)
+    field(OUT, "$(P)HTTPMethod.VAL PP NMS")
+    field(FLNK, "$(P)Execute.PROC")
 }

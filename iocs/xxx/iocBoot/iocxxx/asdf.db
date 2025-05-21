@@ -1,3 +1,0 @@
-record(lso, "$(P)longstring") {
-    field(SIZV, "32000")
-}

@@ -1,0 +1,16 @@
+record(lso, "$(P)set_url:getj") {
+    field(DOL, {const: "http://localhost:3030/action?action_name=getj"})
+    field(OUT, "$(P)FullURL.VAL$ PP")
+    field(SIZV, 2048)
+}
+
+# record(luascript, "$(P)luatest") {
+    # field(INAA, "$(P)ResponseJSON.VAL$ CP NMS")
+    # field(CODE, "@ur_module.lua test()")
+    # field(SYNC, "Sync")
+# }
+
+# record(luascript, "$(P)ur_module_getj") {
+    # field(CODE, "@ur_module.lua getj()")
+    # field(SYNC, "Sync")
+# }

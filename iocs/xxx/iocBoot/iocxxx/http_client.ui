@@ -220,8 +220,20 @@ caMenu{
       <height>396</height>
      </rect>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)ResponseJSON.VAL$</string>
+     <string notr="true">$(P)Response.VAL$</string>
+    </property>
+    <property name="colorMode">
+     <enum>caMultiLineString::Default</enum>
+    </property>
+    <property name="fontScaleMode" stdset="0">
+     <enum>caMultiLineString::WidthAndHeight</enum>
     </property>
    </widget>
    <widget class="caLabel" name="caLabel_46">
@@ -272,7 +284,7 @@ caMenu{
      <rect>
       <x>10</x>
       <y>165</y>
-      <width>231</width>
+      <width>81</width>
       <height>20</height>
      </rect>
     </property>
@@ -284,7 +296,7 @@ caMenu{
      </font>
     </property>
     <property name="text">
-     <string>Response (JSON):</string>
+     <string>Response:</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -315,7 +327,7 @@ caMenu{
      <rect>
       <x>85</x>
       <y>90</y>
-      <width>100</width>
+      <width>90</width>
       <height>20</height>
      </rect>
     </property>
@@ -372,9 +384,9 @@ caMenu{
    <widget class="caLineEdit" name="calineedit">
     <property name="geometry">
      <rect>
-      <x>445</x>
-      <y>125</y>
-      <width>51</width>
+      <x>460</x>
+      <y>90</y>
+      <width>36</width>
       <height>20</height>
      </rect>
     </property>
@@ -402,9 +414,9 @@ caMenu{
    <widget class="caLabel" name="caLabel_49">
     <property name="geometry">
      <rect>
-      <x>385</x>
-      <y>125</y>
-      <width>56</width>
+      <x>405</x>
+      <y>90</y>
+      <width>51</width>
       <height>20</height>
      </rect>
     </property>
@@ -440,6 +452,22 @@ caMenu{
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
+    </property>
+   </widget>
+   <widget class="caMenu" name="camenu_2">
+    <property name="geometry">
+     <rect>
+      <x>405</x>
+      <y>165</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(P)ResponseFormat.VAL</string>
+    </property>
+    <property name="colorMode">
+     <enum>caMenu::Static</enum>
     </property>
    </widget>
   </widget>
