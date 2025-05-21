@@ -6,12 +6,12 @@ iocxxxLinux_registerRecordDeviceDriver(pdbbase)
 
 epicsEnvSet("IOCSH_PS1", "$(IOC)>")
 epicsEnvSet("PREFIX", "xxx:")
-epicsEnvSet("LUA_SCRIPT_PATH", ".")
+epicsEnvSet("LUA_SCRIPT_PATH", "./lua")
 
 AsynHttpClientConfig("client1", "asdf")
 dbLoadRecords("$(ASYN_HTTP_CLIENT)/asynHttpClientApp/Db/asynHttpClient.db","P=$(PREFIX),PORT=client1")
 
-# dbLoadRecords("ur_module.db", "P=$(PREFIX)")
+dbLoadRecords("ur_module.db", "P=$(PREFIX)")
 
 ###############################################################################
 iocInit
