@@ -1,0 +1,32 @@
+record(lso, "$(P)FullURL") {
+    field(DTYP, "asynOctetWrite")
+    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))FULL_URL")
+    field(SIZV, 32767)
+}
+
+record(mbbo, "$(P)HTTPMethod") {
+    field(DTYP, "asynInt32")
+    field(ZRST, "POST")
+    field(ONST, "GET")
+    field(ZRVL, 0)
+    field(ONVL, 1)
+    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))HTTP_METHOD")
+}
+
+record(bo, "$(P)Execute") {
+    field(DTYP, "asynInt32")
+    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))EXECUTE")
+}
+
+record(longin, "$(P)StatusCode") {
+    field(DTYP, "asynInt32")
+    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))STATUS_CODE")
+    field(SCAN, "I/O Intr")
+}
+
+record(lsi, "$(P)ResponseJSON") {
+    field(DTYP, "asynOctetRead")
+    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE")
+    field(SIZV, 32767)
+    field(SCAN, "I/O Intr")
+}

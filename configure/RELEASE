@@ -1,0 +1,19 @@
+# RELEASE Location of external products
+# Run "gnumake clean uninstall install" in the application
+# top directory each time this file is changed.
+##############################################################################
+
+SUPPORT = 
+EPICS_BASE = 
+LUA = $(SUPPORT)/lua-R3-1/
+ASYN = $(SUPPORT)/asyn-R4-44-2
+
+CPR_INCLUDE_DIR = /home/beams/NMARKS/.local/include
+CPR_LIB_DIR = /home/beams/NMARKS/.local/lib64
+
+# These lines allow developers to override these RELEASE settings
+# without having to modify this file directly.
+-include $(TOP)/../RELEASE.local
+-include $(TOP)/../RELEASE.$(EPICS_HOST_ARCH).local
+-include $(TOP)/configure/RELEASE.local
+
