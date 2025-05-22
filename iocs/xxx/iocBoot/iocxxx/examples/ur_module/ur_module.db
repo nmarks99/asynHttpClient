@@ -1,20 +1,19 @@
 record(lso, "$(P)set_action_url:getj") {
-    field(DOL, {const: "http://localhost:3030/action?action_name=getj"})
-    field(OUT, "$(P)FullURL.VAL$ PP")
+    field(DOL, {const: "http://$(HOST)/action?action_name=getj"})
+    field(OUT, "$(P)$(R)FullURL.VAL$ PP")
     field(SIZV, 2048)
 }
 
 record(bo, "$(P)URModule:toggle_gripper") {
     field(ZNAM, "Open")
     field(ONAM, "Close")
-    field(FLNK, "$(P)set_action_url:toggle_gripper.PROC")
+    field(FLNK, "$(P)run_toggle_gripper.PROC")
 }
 
-record(luascript, "$(P)set_action_url:toggle_gripper") {
-    field(PINI, 0)
+record(luascript, "$(P)run_toggle_gripper") {
     field(INPA, "$(P)URModule:toggle_gripper.VAL")
-    field(CODE, "@ur_module.lua get_url_toggle_gripper()")
+    field(CODE, "@ur_module.lua get_url_toggle_gripper({prefix='$(P)',host='$(HOST)'})")
     field(SYNC, "Sync")
-    field(OUT, "$(P)FullURL.VAL$ PP")
-    field(FLNK, "$(P)Execute.PROC")
+    field(OUT, "$(P)$(R)FullURL.VAL$ PP")
+    field(FLNK, "$(P)$(R)Post.PROC")
 }

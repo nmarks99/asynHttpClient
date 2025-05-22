@@ -1,4 +1,4 @@
--- Correct path to ASYN_HTTP_CLIENT_TOP
+-- Correct path to ASYN_HTTP_CLIENT
 local ASYN_HTTP_CLIENT = "/home/beams/NMARKS/devel/asynHttpClient/"
 package.path = ASYN_HTTP_CLIENT .. "asynHttpClientApp/src/lua/?.lua;" .. package.path
 
@@ -19,22 +19,19 @@ function string_to_table(str)
     return chars
 end
 
-function get_url_toggle_gripper()
-    epics.put("xxx:HTTPMethod", 2)
+function get_url_toggle_gripper(args)
     local openval
     local closeval
 
     if A == 1 then
-        print("Getting url for closing gripper")
         openval = false
         closeval = true
     else
-        print("Getting url for opening gripper")
         openval = true
         closeval = false
     end
 
-    local url = "http://localhost:3030/action?action_name=toggle_gripper"
+    local url = string.format("http://%s/action?action_name=toggle_gripper", args.host)
     local action_vars = {
         open = openval,
         close = closeval,

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>397</width>
-    <height>320</height>
+    <width>226</width>
+    <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -116,18 +116,90 @@ caMenu{
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <widget class="caChoice" name="cachoice">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(P)URModule:toggle_gripper.VAL</string>
+    </property>
+    <property name="stackingMode" stdset="0">
+     <enum>caChoice::Column</enum>
+    </property>
+    <property name="endBit">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>40</y>
+      <width>61</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper:</string>
+    </property>
+   </widget>
+   <widget class="caFrame" name="caframe_8">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>250</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="background">
+     <color>
+      <red>0</red>
+      <green>53</green>
+      <blue>132</blue>
+     </color>
+    </property>
+    <property name="backgroundMode">
+     <enum>caFrame::Filled</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>2</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>2</number>
+     </property>
+    </layout>
+   </widget>
    <widget class="caLabel" name="caLabel_45">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>146</width>
-      <height>30</height>
+      <x>5</x>
+      <y>2</y>
+      <width>200</width>
+      <height>26</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>18</pointsize>
+      <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -143,9 +215,9 @@ caMenu{
     </property>
     <property name="foreground">
      <color>
-      <red>0</red>
-      <green>0</green>
-      <blue>0</blue>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
      </color>
     </property>
     <property name="background">
@@ -159,25 +231,6 @@ caMenu{
      <enum>QFrame::NoFrame</enum>
     </property>
    </widget>
-   <widget class="caChoice" name="cachoice">
-    <property name="geometry">
-     <rect>
-      <x>125</x>
-      <y>90</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="channel" stdset="0">
-     <string notr="true">$(P)URModule:toggle_gripper.VAL</string>
-    </property>
-    <property name="stackingMode" stdset="0">
-     <enum>caChoice::Column</enum>
-    </property>
-    <property name="endBit">
-     <number>1</number>
-    </property>
-   </widget>
   </widget>
  </widget>
  <customwidgets>
@@ -185,6 +238,12 @@ caMenu{
    <class>caChoice</class>
    <extends>QWidget</extends>
    <header>caChoice</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>caLabel</class>

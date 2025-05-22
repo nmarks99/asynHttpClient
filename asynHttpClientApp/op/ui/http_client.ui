@@ -126,7 +126,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)FullURL.VAL$</string>
+     <string notr="true">$(P)$(R)FullURL.VAL$</string>
     </property>
     <property name="background">
      <color>
@@ -198,7 +198,7 @@ caMenu{
      <string>Execute</string>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)Execute.PROC</string>
+     <string notr="true">$(P)$(R)Execute.PROC</string>
     </property>
     <property name="background">
      <color>
@@ -227,7 +227,7 @@ caMenu{
      <enum>Qt::ScrollBarAsNeeded</enum>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)Response.VAL$</string>
+     <string notr="true">$(P)$(R)Response.VAL$</string>
     </property>
     <property name="colorMode">
      <enum>caMultiLineString::Default</enum>
@@ -332,7 +332,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)HTTPMethod</string>
+     <string notr="true">$(P)$(R)HTTPMethod</string>
     </property>
     <property name="colorMode">
      <enum>caMenu::Static</enum>
@@ -391,7 +391,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)StatusCode.VAL</string>
+     <string notr="true">$(P)$(R)StatusCode.VAL</string>
     </property>
     <property name="foreground">
      <color>
@@ -464,7 +464,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)ResponseFormat.VAL</string>
+     <string notr="true">$(P)$(R)ResponseFormat.VAL</string>
     </property>
     <property name="colorMode">
      <enum>caMenu::Static</enum>
