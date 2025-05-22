@@ -28,7 +28,7 @@ enum class HTTPMethod {
 
 class AsynHttpClient : public asynPortDriver {
   public:
-    AsynHttpClient(const char *asyn_port_name, const char *dev_port_name);
+    AsynHttpClient(const char *port_name);
     // virtual void poll(void);
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
     virtual asynStatus writeOctet(asynUser *pasynUser, const char *value, size_t maxChars, size_t *nActual);

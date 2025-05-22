@@ -1,5 +1,6 @@
-local script_dir = debug.getinfo(1, "S").source:match("@(.*/)")
-package.path = script_dir .. "?.lua;" .. package.path
+-- Correct path to ASYN_HTTP_CLIENT_TOP
+local ASYN_HTTP_CLIENT = "/home/beams/NMARKS/devel/asynHttpClient/"
+package.path = ASYN_HTTP_CLIENT .. "asynHttpClientApp/src/lua/?.lua;" .. package.path
 
 epics = require("epics")
 json = require("lunajson")

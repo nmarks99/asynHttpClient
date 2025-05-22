@@ -1,0 +1,3 @@
+# Paths are relative to iocBoot/iocxxx
+epicsEnvSet("LUA_SCRIPT_PATH", "examples/ur_module/lua/")
+dbLoadRecords("examples/ur_module/ur_module.db", "P=$(PREFIX)")

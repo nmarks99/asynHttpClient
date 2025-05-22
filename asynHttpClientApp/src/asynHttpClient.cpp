@@ -13,8 +13,8 @@
 // pAsynHttpClient->poll();
 // }
 
-AsynHttpClient::AsynHttpClient(const char *asyn_port, const char *dev_port)
-    : asynPortDriver(asyn_port, MAX_CONTROLLERS,
+AsynHttpClient::AsynHttpClient(const char *port_name)
+    : asynPortDriver(port_name, MAX_CONTROLLERS,
                      asynInt32Mask | asynFloat64Mask | asynDrvUserMask | asynOctetMask | asynInt32ArrayMask,
                      asynInt32Mask | asynFloat64Mask | asynOctetMask | asynInt32ArrayMask,
                      ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0) // autoConnect, priority, stackSize
@@ -141,19 +141,20 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
     return status;
 }
 
-// register function for iocsh
-extern "C" int AsynHttpClientConfig(const char *asyn_port_name, const char *robot_ip) {
-    AsynHttpClient *pAsynHttpClient = new AsynHttpClient(asyn_port_name, robot_ip);
+// //////////////////
+// Register for iocsh
+// //////////////////
+extern "C" int AsynHttpClientConfig(const char *asyn_port_name) {
+    AsynHttpClient *pAsynHttpClient = new AsynHttpClient(asyn_port_name);
     (void)pAsynHttpClient;
     return (asynSuccess);
 }
 
 static const iocshArg httpClientArg0 = {"Asyn port name", iocshArgString};
-static const iocshArg httpClientArg1 = {"Device port name", iocshArgString};
-static const iocshArg *const httpClientArgs[2] = {&httpClientArg0, &httpClientArg1};
-static const iocshFuncDef httpClientFuncDef = {"AsynHttpClientConfig", 2, httpClientArgs};
+static const iocshArg *const httpClientArgs[1] = {&httpClientArg0};
+static const iocshFuncDef httpClientFuncDef = {"AsynHttpClientConfig", 1, httpClientArgs};
 
-static void httpClientCallFunc(const iocshArgBuf *args) { AsynHttpClientConfig(args[0].sval, args[1].sval); }
+static void httpClientCallFunc(const iocshArgBuf *args) { AsynHttpClientConfig(args[0].sval); }
 
 void AsynHttpClientRegister(void) { iocshRegister(&httpClientFuncDef, httpClientCallFunc); }
 
