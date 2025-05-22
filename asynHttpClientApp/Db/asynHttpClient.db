@@ -55,6 +55,18 @@ record(bo, "$(P)$(R)ResponseFormat") {
     field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE_FORMAT")
 }
 
+record(stringout, "$(P)$(R)JSONParserKey") {
+    field(DTYP, "asynOctetWrite")
+    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))JSON_PARSER_KEY")
+}
+
+record(lsi, "$(P)$(R)JSONParserValue") {
+    field(DTYP, "asynOctetRead")
+    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))JSON_PARSER_VALUE")
+    field(SIZV, 32767)
+    field(SCAN, "I/O Intr")
+}
+
 # Records for combined setting HTTP method and sending the request
 #
 record(longout, "$(P)$(R)Post") {

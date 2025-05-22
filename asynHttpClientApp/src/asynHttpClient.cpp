@@ -2,6 +2,7 @@
 #include <epicsExport.h>
 #include <epicsThread.h>
 #include <iocsh.h>
+#include <iostream>
 
 #include "asynHttpClient.hpp"
 
@@ -26,6 +27,8 @@ AsynHttpClient::AsynHttpClient(const char *port_name)
     createParam(RESPONSE_FORMAT_STRING, asynParamInt32, &responseFormatIndex_);
     createParam(EXECUTE_STRING, asynParamInt32, &executeIndex_);
     createParam(STATUS_CODE_STRING, asynParamInt32, &statusCodeIndex_);
+    createParam(JSON_PARSER_KEY_STRING, asynParamOctet, &jsonParserKeyIndex_);
+    createParam(JSON_PARSER_VALUE_STRING, asynParamOctet, &jsonParserValueIndex_);
 
     // epicsThreadCreate("AsynHttpClientPoller", epicsThreadPriorityLow,
     // epicsThreadGetStackSize(epicsThreadStackMedium), (EPICSTHREADFUNC)poll_thread_C, this);
@@ -55,9 +58,20 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     if (function == fullUrlIndex_) {
         full_url_ = value;
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting URL to %s\n", full_url_.c_str());
-        *nActual = full_url_.length();
+    }
+    else if (function == jsonParserKeyIndex_) {
+        std::string json_val_out = "";
+        if (!response_json_.empty()) {
+            if (response_json_.contains(value)) {
+                json_val_out = response_json_.at(value).dump(2);
+            } else {
+                asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Key '%s' not found in latest JSON response\n", value);
+            }
+        }
+        setStringParam(jsonParserValueIndex_, json_val_out);
     }
 
+    *nActual = strlen(value);
     callParamCallbacks();
     return status;
 }
@@ -113,10 +127,11 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
             }
 
             if (format_json_) {
-                nlohmann::basic_json data;
+                nlohmann::json json_data;
                 try {
-                    data = nlohmann::json::parse(response.text);
-                    response_str = data.dump(2);
+                    json_data = nlohmann::json::parse(response.text);
+                    response_json_ = json_data;
+                    response_str = json_data.dump(2);
                 } catch (const std::exception &e) {
                     asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s\n", e.what());
                     response_str = "";

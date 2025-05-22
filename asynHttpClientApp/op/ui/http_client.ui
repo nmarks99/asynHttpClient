@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>514</width>
-    <height>595</height>
+    <width>518</width>
+    <height>757</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -188,8 +188,8 @@ caMenu{
    <widget class="caMessageButton" name="camessagebutton">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>125</y>
+      <x>185</x>
+      <y>90</y>
       <width>51</width>
       <height>22</height>
      </rect>
@@ -217,7 +217,7 @@ caMenu{
       <x>10</x>
       <y>190</y>
       <width>496</width>
-      <height>396</height>
+      <height>291</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -468,6 +468,143 @@ caMenu{
     </property>
     <property name="colorMode">
      <enum>caMenu::Static</enum>
+    </property>
+   </widget>
+   <widget class="caMultiLineString" name="camultilinestring_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>555</y>
+      <width>496</width>
+      <height>176</height>
+     </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(P)$(R)JSONParserValue.VAL$</string>
+    </property>
+    <property name="colorMode">
+     <enum>caMultiLineString::Default</enum>
+    </property>
+    <property name="fontScaleMode" stdset="0">
+     <enum>caMultiLineString::WidthAndHeight</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="caLabel_50">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Key:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::WidthAndHeight</enum>
+    </property>
+    <property name="foreground">
+     <color>
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+   </widget>
+   <widget class="caLabel" name="caLabel_51">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>535</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Value:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="fontScaleMode">
+     <enum>ESimpleLabel::WidthAndHeight</enum>
+    </property>
+    <property name="foreground">
+     <color>
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="background">
+     <color alpha="0">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+   </widget>
+   <widget class="caTextEntry" name="catextentry_5">
+    <property name="geometry">
+     <rect>
+      <x>65</x>
+      <y>510</y>
+      <width>196</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(P)$(R)JSONParserKey.VAL</string>
+    </property>
+    <property name="background">
+     <color>
+      <red>115</red>
+      <green>223</green>
+      <blue>255</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="formatType">
+     <enum>caLineEdit::string</enum>
     </property>
    </widget>
   </widget>
