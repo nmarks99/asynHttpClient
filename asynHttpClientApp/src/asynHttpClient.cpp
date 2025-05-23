@@ -50,6 +50,18 @@ AsynHttpClient::AsynHttpClient(const char *port_name)
 // }
 // }
 
+std::vector<std::string> get_json_path_keys(const std::string &path) {
+    std::vector<std::string> keys;
+    std::string segment;
+    std::istringstream path_stream(path);
+    while (std::getline(path_stream, segment, '.')) {
+	if (!segment.empty()) { // Handle cases like "key1..key2" or trailing/leading dots
+	    keys.push_back(segment);
+	}
+    }
+    return keys;
+}
+
 asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, size_t maxChars,
                                       size_t *nActual) {
     int function = pasynUser->reason;
@@ -62,8 +74,21 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     else if (function == jsonParserKeyIndex_) {
         std::string json_val_out = "";
         if (!response_json_.empty()) {
-            if (response_json_.contains(value)) {
-                json_val_out = response_json_.at(value).dump(2);
+            std::vector<std::string> keys = get_json_path_keys(value);
+
+            nlohmann::json node = response_json_;
+            bool found = true;
+            for (const auto &k : keys) {
+                if (node.contains(k)) {
+                    node = node.at(k);
+                } else {
+                    found = false;
+                    break;
+                }
+            }
+
+            if (found) {
+                json_val_out = node.dump(2);
             } else {
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Key '%s' not found in latest JSON response\n", value);
             }
