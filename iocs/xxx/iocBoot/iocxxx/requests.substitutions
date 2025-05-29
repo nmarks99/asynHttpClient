@@ -1,0 +1,8 @@
+file "$(ASYN_HTTP_CLIENT)/db/http_request.db"
+{
+pattern
+{R,       ADDR, METHOD, FORMAT, PARSE}
+{"Req1:",    0,      0,      1, "properties.forecast"}
+{"Req2:",    1,      0       1,  "properties.periods"}
+{"Req3:",    2,      0       1,  "properties.periods"}
+}

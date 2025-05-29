@@ -1,0 +1,6 @@
+record(stringout, "$(P)Forecast$(N):Name") {}
+record(stringout, "$(P)Forecast$(N)") {}
+record(stringout, "$(P)Forecast$(N):ProbPrecip") {}
+record(ao, "$(P)Forecast$(N):Temperature") {}
+# record(stringout, "$(P)Forecast:WindDirection") {}
+# record(stringout, "$(P)Forecast:WindSpeed") {}

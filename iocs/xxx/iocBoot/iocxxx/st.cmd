@@ -7,11 +7,12 @@ iocxxxLinux_registerRecordDeviceDriver(pdbbase)
 epicsEnvSet("IOCSH_PS1", "$(IOC)>")
 epicsEnvSet("PREFIX", "xxx:")
 
-# Instantiate the client with a name
 AsynHttpClientConfig("client1")
+dbLoadTemplate("requests.substitutions", "P=$(PREFIX),PORT=client1")
 
-# Example: Control robot arm with REST API
-iocshLoad("examples/ur_module/ur_module.iocsh", "PORT=client1")
+epicsEnvSet("LUA_SCRIPT_PATH", ".")
+dbLoadRecords("weather.db", "P=$(PREFIX),R1=Req1:,R2=Req2:,R3=Req3:")
+dbLoadTemplate("weekly.substitutions", "P=$(PREFIX)")
 
 ###############################################################################
 iocInit

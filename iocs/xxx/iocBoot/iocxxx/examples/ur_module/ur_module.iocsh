@@ -1,4 +1,0 @@
-# Paths are relative to iocBoot/iocxxx
-epicsEnvSet("LUA_SCRIPT_PATH", "examples/ur_module/lua/")
-dbLoadTemplate("examples/ur_module/requests.substitutions", "P=$(PREFIX),PORT=$(PORT)")
-dbLoadRecords("examples/ur_module/ur_module.db", "P=$(PREFIX),R1=Req1:,R2=Req2:,HOST=localhost:3030")
