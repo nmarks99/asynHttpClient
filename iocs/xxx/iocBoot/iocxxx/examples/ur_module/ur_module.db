@@ -1,14 +1,21 @@
-# record(lso, "$(P)UR:ToggleGripper:set_parser_key") {
-    # field(PINI, 1)
-    # field(DOL, {const: "action_id"})
-    # field(OUT, "$(P)$(R1)JSONParserKey.VAL$ PP")
-    # field(SIZV, 2048)
-# }
-
 record(bo, "$(P)UR:ToggleGripper") {
     field(ZNAM, "Open")
     field(ONAM, "Close")
-    field(FLNK, "$(P)UR:ToggleGripper:set_post_url.PROC")
+    field(FLNK, "$(P)UR:try_run_toggle_gripper.PROC")
+}
+
+record(calcout, "$(P)UR:try_run_toggle_gripper") {
+    field(INPA, "$(P)UR:ToggleGripper:Running.VAL")
+    field(CALC, "A")
+    field(DOPT, "Use OCAL")
+    field(OCAL, "1")
+    field(OOPT, "When Zero")
+    field(OUT, "$(P)UR:run_toggle_gripper.PROC")
+}
+
+record(fanout, "$(P)UR:run_toggle_gripper") {
+    field(LNK0, "$(P)UR:ToggleGripper:set_post_url.PROC")
+    field(LNK1, "$(P)UR:ToggleGripper:enable_status_scan.PROC")
 }
 
 record(luascript, "$(P)UR:ToggleGripper:set_post_url") {
@@ -32,7 +39,28 @@ record(luascript, "$(P)UR:ToggleGripper:set_get_url") {
     field(FLNK, "$(P)$(R2)Get.PROC")
 }
 
-record(luascript, "$(P)UR:ToggleGripper:Running") {
+record(luascript, "$(P)UR:ToggleGripper:check_running") {
     field(INAA, "$(P)$(R2)JSONParserValue.VAL$ NPP")
     field(CODE, "table.concat(AA)=='running' and 1 or 0")
+    field(FLNK, "$(P)$(R2)Execute.PROC")
+}
+
+record(bi, "$(P)UR:ToggleGripper:Running") {
+    field(INP, "$(P)UR:ToggleGripper:check_running.VAL CP")
+    field(ZNAM, "Done")
+    field(ONAM, "Running")
+}
+
+record(longout, "$(P)UR:ToggleGripper:enable_status_scan") {
+    field(VAL, "9") 
+    field(OUT, "$(P)UR:ToggleGripper:check_running.SCAN PP")
+}
+
+record(calcout, "$(P)UR:ToggleGripper:disable_status_scan") {
+    field(INPA, "$(P)UR:ToggleGripper:check_running.VAL CP")
+    field(CALC, "A")
+    field(OCAL, "0")
+    field(DOPT, "Use OCAL")
+    field(OOPT, "Transition To Zero")
+    field(OUT, "$(P)UR:ToggleGripper:check_running.SCAN PP")
 }

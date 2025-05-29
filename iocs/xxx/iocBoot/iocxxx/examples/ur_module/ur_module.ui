@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>226</width>
+    <width>282</width>
     <height>128</height>
    </rect>
   </property>
@@ -153,7 +153,7 @@ caMenu{
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>250</width>
+      <width>291</width>
       <height>30</height>
      </rect>
     </property>
@@ -231,6 +231,29 @@ caMenu{
      <enum>QFrame::NoFrame</enum>
     </property>
    </widget>
+   <widget class="caLineEdit" name="calineedit">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>40</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="channel" stdset="0">
+     <string notr="true">$(P)UR:ToggleGripper:Running</string>
+    </property>
+    <property name="foreground">
+     <color>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
@@ -249,6 +272,11 @@ caMenu{
    <class>caLabel</class>
    <extends>QLabel</extends>
    <header>caLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>caLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>caLineEdit</header>
   </customwidget>
  </customwidgets>
  <resources/>

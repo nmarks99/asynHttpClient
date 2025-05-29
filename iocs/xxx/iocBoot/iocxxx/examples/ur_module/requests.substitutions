@@ -24,6 +24,5 @@ file "$(TOP)/../../db/http_request.db"
 pattern
 {R,      ADDR,  METHOD,  FORMAT, PARSE}
 {"Req1:"    0,       2,       1, "action_id"}
-{"Req2:"    1,       0,       0, ""}
-{"Req3:"    2,       0,       1, ""}
+{"Req2:"    1,       0,       1, "status"}
 }
