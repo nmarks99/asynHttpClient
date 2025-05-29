@@ -37,7 +37,8 @@ class AsynHttpClient : public asynPortDriver {
     virtual asynStatus writeOctet(asynUser *pasynUser, const char *value, size_t maxChars, size_t *nActual);
 
   private:
-    nlohmann::json response_json_;
+    // asyn address -> nlohmann::json object
+    std::unordered_map<int, nlohmann::json> json_response_map_;
 
   protected:
     asynUser *pasynUserAsynHttpClient_;

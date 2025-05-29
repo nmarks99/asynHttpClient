@@ -2,7 +2,6 @@
 #include <epicsExport.h>
 #include <epicsThread.h>
 #include <iocsh.h>
-#include <iostream>
 
 #include "asynHttpClient.hpp"
 
@@ -51,11 +50,16 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     }
     else if (function == jsonParserKeyIndex_) {        
 
+        nlohmann::json response_json;
+        if (json_response_map_.count(addr) > 0) {
+            response_json = json_response_map_.at(addr);
+        }
+
         std::string json_val_out = "";
-        if (!response_json_.empty() and strlen(value) > 0) {
+        if (!response_json.empty() and strlen(value) > 0) {
             std::vector<std::string> keys = get_json_path_keys(value);
 
-            nlohmann::json node = response_json_;
+            nlohmann::json node = response_json;
             bool found = true;
             for (const auto &k : keys) {
                 if (node.contains(k)) {
@@ -150,7 +154,8 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
                 nlohmann::json json_data;
                 try {
                     json_data = nlohmann::json::parse(response.text);
-                    response_json_ = json_data;
+                    // response_json_ = json_data;
+                    json_response_map_.insert_or_assign(addr, json_data);
                     response_str = json_data.dump(2);
                 } catch (const std::exception &e) {
                     asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "%s\n", e.what());
