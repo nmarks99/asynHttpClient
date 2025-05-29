@@ -42,11 +42,15 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     int function = pasynUser->reason;
     asynStatus status = asynSuccess;
 
+    int addr;
+    getAddress(pasynUser, &addr);
+
     if (function == fullUrlIndex_) {
-        full_url_ = value;
-        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting URL to %s\n", full_url_.c_str());
+        setStringParam(addr, fullUrlIndex_, value);
+        asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting URL to %s\n", value);
     }
-    else if (function == jsonParserKeyIndex_) {
+    else if (function == jsonParserKeyIndex_) {        
+
         std::string json_val_out = "";
         if (!response_json_.empty() and strlen(value) > 0) {
             std::vector<std::string> keys = get_json_path_keys(value);
@@ -72,11 +76,12 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Key '%s' not found in latest JSON response\n", value);
             }
         }
-        setStringParam(jsonParserValueIndex_, json_val_out);
-    }
+
+        setStringParam(addr, jsonParserValueIndex_, json_val_out);
+    } 
 
     *nActual = strlen(value);
-    callParamCallbacks();
+    callParamCallbacks(addr);
     return status;
 }
 
@@ -84,30 +89,39 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
     int function = pasynUser->reason;
     asynStatus status = asynSuccess;
 
+    int addr;
+    getAddress(pasynUser, &addr);
+
     if (function == executeIndex_) {
-        if (full_url_.length() > 0) {
+        std::string full_url;
+        getStringParam(addr, fullUrlIndex_, full_url);
+
+        if (full_url.length() > 0) {
             cpr::Response response;
-            switch (method_) {
+
+            int method;
+            getIntegerParam(addr, httpMethodIndex_, &method);
+            switch (static_cast<HTTPMethod>(method)) {
             case HTTPMethod::GET:
-                response = cpr::Get(cpr::Url{full_url_});
+                response = cpr::Get(cpr::Url{full_url});
                 break;
             case HTTPMethod::HEAD:
-                response = cpr::Head(cpr::Url{full_url_});
+                response = cpr::Head(cpr::Url{full_url});
                 break;
             case HTTPMethod::POST:
-                response = cpr::Post(cpr::Url{full_url_});
+                response = cpr::Post(cpr::Url{full_url});
                 break;
             case HTTPMethod::PUT:
-                response = cpr::Put(cpr::Url{full_url_});
+                response = cpr::Put(cpr::Url{full_url});
                 break;
             case HTTPMethod::DELETE:
-                response = cpr::Delete(cpr::Url{full_url_});
+                response = cpr::Delete(cpr::Url{full_url});
                 break;
             case HTTPMethod::OPTIONS:
-                response = cpr::Options(cpr::Url{full_url_});
+                response = cpr::Options(cpr::Url{full_url});
                 break;
             case HTTPMethod::PATCH:
-                response = cpr::Patch(cpr::Url{full_url_});
+                response = cpr::Patch(cpr::Url{full_url});
                 break;
             case HTTPMethod::CONNECT:
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "CONNECT method not implemented\n");
@@ -119,18 +133,20 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "No HTTP method specified\n");
                 break;
             }
-            setIntegerParam(statusCodeIndex_, response.status_code);
+            setIntegerParam(addr, statusCodeIndex_, response.status_code);
 
             std::string response_str = "";
             if (response.status_code != 200) {
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Request failed with status code: %ld\n",
                           response.status_code);
-                setStringParam(responseIndex_, response_str);
-                callParamCallbacks();
+                setStringParam(addr, responseIndex_, response_str);
+                callParamCallbacks(addr);
                 return asynStatus::asynError;
             }
 
-            if (format_json_) {
+            int format_json;
+            getIntegerParam(addr, responseFormatIndex_, &format_json);
+            if (static_cast<bool>(format_json)) {
                 nlohmann::json json_data;
                 try {
                     json_data = nlohmann::json::parse(response.text);
@@ -143,20 +159,20 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
             } else {
                 response_str = response.text;
             }
-            setStringParam(responseIndex_, response_str);
+            setStringParam(addr, responseIndex_, response_str);
         }
     }
 
     else if (function == httpMethodIndex_) {
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting HTTP method to %d\n", value);
-        method_ = static_cast<HTTPMethod>(value);
+        setIntegerParam(addr, httpMethodIndex_, value);
     }
 
     else if (function == responseFormatIndex_) {
-        format_json_ = static_cast<bool>(value);
+        setIntegerParam(addr, responseFormatIndex_, value);
     }
 
-    callParamCallbacks();
+    callParamCallbacks(addr);
     return status;
 }
 

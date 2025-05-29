@@ -1,6 +1,6 @@
 record(lso, "$(P)$(R)FullURL") {
     field(DTYP, "asynOctetWrite")
-    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))FULL_URL")
+    field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))FULL_URL")
     field(SIZV, 2048)
 }
 
@@ -26,23 +26,23 @@ record(mbbo, "$(P)$(R)HTTPMethod") {
     field(SXVL, 6)
     field(SVVL, 7)
     field(EIVL, 8)
-    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))HTTP_METHOD")
+    field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))HTTP_METHOD")
 }
 
 record(bo, "$(P)$(R)Execute") {
     field(DTYP, "asynInt32")
-    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))EXECUTE")
+    field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))EXECUTE")
 }
 
 record(longin, "$(P)$(R)StatusCode") {
     field(DTYP, "asynInt32")
-    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))STATUS_CODE")
+    field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))STATUS_CODE")
     field(SCAN, "I/O Intr")
 }
 
 record(lsi, "$(P)$(R)Response") {
     field(DTYP, "asynOctetRead")
-    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE")
+    field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))RESPONSE")
     field(SIZV, 32767)
     field(SCAN, "I/O Intr")
     field(FLNK, "$(P)$(R)JSONParserKey.PROC")
@@ -53,17 +53,17 @@ record(bo, "$(P)$(R)ResponseFormat") {
     field(ZNAM, "Raw")
     field(ONAM, "JSON")
     field(VAL, 0)
-    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE_FORMAT")
+    field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))RESPONSE_FORMAT")
 }
 
 record(stringout, "$(P)$(R)JSONParserKey") {
     field(DTYP, "asynOctetWrite")
-    field(OUT, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))JSON_PARSER_KEY")
+    field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))JSON_PARSER_KEY")
 }
 
 record(lsi, "$(P)$(R)JSONParserValue") {
     field(DTYP, "asynOctetRead")
-    field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))JSON_PARSER_VALUE")
+    field(INP, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))JSON_PARSER_VALUE")
     field(SIZV, 32767)
     field(SCAN, "I/O Intr")
 }

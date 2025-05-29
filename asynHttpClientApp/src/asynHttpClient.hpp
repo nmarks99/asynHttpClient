@@ -15,7 +15,7 @@ static constexpr char JSON_PARSER_KEY_STRING[] = "JSON_PARSER_KEY";
 static constexpr char JSON_PARSER_VALUE_STRING[] = "JSON_PARSER_VALUE";
 
 // HACK: should be a argument to constructor?
-constexpr int MAX_ADDR = 10;
+constexpr int MAX_ADDR = 100;
 
 enum class HTTPMethod {
     GET,
@@ -37,11 +37,7 @@ class AsynHttpClient : public asynPortDriver {
     virtual asynStatus writeOctet(asynUser *pasynUser, const char *value, size_t maxChars, size_t *nActual);
 
   private:
-    double poll_time_;
-    bool format_json_ = false;
-    std::string full_url_;
     nlohmann::json response_json_;
-    HTTPMethod method_ = HTTPMethod::GET;
 
   protected:
     asynUser *pasynUserAsynHttpClient_;

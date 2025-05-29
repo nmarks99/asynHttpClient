@@ -8,10 +8,11 @@ epicsEnvSet("IOCSH_PS1", "$(IOC)>")
 epicsEnvSet("PREFIX", "xxx:")
 
 AsynHttpClientConfig("client1")
-dbLoadRecords("$(ASYN_HTTP_CLIENT)/db/asynHttpClient.db","P=$(PREFIX),R=http:,PORT=client1")
+dbLoadTemplate("requests.substitutions","P=$(PREFIX),PORT=client1")
 
 # Example that interacts with REST API for robot arm
 < examples/ur_module/ur_module.iocsh
+
 
 ###############################################################################
 iocInit
