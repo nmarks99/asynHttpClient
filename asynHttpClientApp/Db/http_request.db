@@ -5,7 +5,7 @@ record(lso, "$(P)$(R)FullURL") {
 }
 
 record(mbbo, "$(P)$(R)HTTPMethod") {
-    field(VAL, 0)
+    field(VAL, "$(METHOD=GET)")
     field(PINI, 1)
     field(DTYP, "asynInt32")
     field(ZRST, "GET")
@@ -50,13 +50,15 @@ record(lsi, "$(P)$(R)Response") {
 
 record(bo, "$(P)$(R)ResponseFormat") {
     field(DTYP, "asynInt32")
-    field(ZNAM, "Raw")
+    field(PINI, 1)
+    field(ZNAM, "RAW")
     field(ONAM, "JSON")
-    field(VAL, 0)
+    field(VAL, "$(FORMAT=0)")
     field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))RESPONSE_FORMAT")
 }
 
 record(stringout, "$(P)$(R)JSONParserKey") {
+    field(VAL, "$(PARSE=)")
     field(DTYP, "asynOctetWrite")
     field(OUT, "@asyn($(PORT),$(ADDR),$(TIMEOUT=1))JSON_PARSER_KEY")
 }

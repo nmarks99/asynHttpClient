@@ -1,0 +1,29 @@
+## Load and configure several HTTP requests
+
+# METHOD
+# 0: GET
+# 1: HEAD
+# 2: POST
+# 3: PUT
+# 4: DELETE
+# 5: CONNECT
+# 6: OPTIONS
+# 7: TRACE
+# 8: PATCH
+
+# FORMAT
+# 0: RAW
+# 1: JSON
+
+# PARSE
+# Key to lookup in JSON response
+# Only relevate when FORMAT=1 (JSON)
+
+file "$(TOP)/../../db/http_request.db"
+{
+pattern
+{R,      ADDR,  METHOD,  FORMAT, PARSE}
+{"Req1:"    0,       2,       1, "action_id"}
+{"Req2:"    1,       0,       0, ""}
+{"Req3:"    2,       0,       1, ""}
+}

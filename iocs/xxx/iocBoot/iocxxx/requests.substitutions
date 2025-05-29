@@ -1,8 +1,0 @@
-file "$(TOP)/../../db/http_request.db"
-{
-pattern
-{R,      ADDR}
-{"Req1:"    0}
-{"Req2:"    1}
-{"Req3:"    2}
-}

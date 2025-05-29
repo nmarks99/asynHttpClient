@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>518</width>
-    <height>757</height>
+    <width>507</width>
+    <height>702</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -145,21 +145,21 @@ caMenu{
    <widget class="caLabel" name="caLabel_45">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>2</x>
+      <y>2</y>
       <width>146</width>
-      <height>30</height>
+      <height>25</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>18</pointsize>
+      <pointsize>15</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>HTTP Client</string>
+     <string>$(P)$(R)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignAbsolute|Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -169,9 +169,9 @@ caMenu{
     </property>
     <property name="foreground">
      <color>
-      <red>0</red>
-      <green>0</green>
-      <blue>0</blue>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
      </color>
     </property>
     <property name="background">
@@ -215,8 +215,8 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>190</y>
-      <width>496</width>
+      <y>155</y>
+      <width>486</width>
       <height>291</height>
      </rect>
     </property>
@@ -283,7 +283,7 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>165</y>
+      <y>130</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -457,8 +457,8 @@ caMenu{
    <widget class="caMenu" name="camenu_2">
     <property name="geometry">
      <rect>
-      <x>405</x>
-      <y>165</y>
+      <x>395</x>
+      <y>130</y>
       <width>100</width>
       <height>20</height>
      </rect>
@@ -474,8 +474,8 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>555</y>
-      <width>496</width>
+      <y>515</y>
+      <width>486</width>
       <height>176</height>
      </rect>
     </property>
@@ -499,8 +499,8 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>510</y>
-      <width>50</width>
+      <y>470</y>
+      <width>51</width>
       <height>20</height>
      </rect>
     </property>
@@ -542,7 +542,7 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>535</y>
+      <y>495</y>
       <width>50</width>
       <height>20</height>
      </rect>
@@ -585,7 +585,7 @@ caMenu{
     <property name="geometry">
      <rect>
       <x>65</x>
-      <y>510</y>
+      <y>470</y>
       <width>196</width>
       <height>20</height>
      </rect>
@@ -607,6 +607,62 @@ caMenu{
      <enum>caLineEdit::string</enum>
     </property>
    </widget>
+   <widget class="caFrame" name="caframe_9">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>526</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="background">
+     <color>
+      <red>0</red>
+      <green>53</green>
+      <blue>132</blue>
+     </color>
+    </property>
+    <property name="backgroundMode">
+     <enum>caFrame::Filled</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>2</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>2</number>
+     </property>
+    </layout>
+   </widget>
+   <zorder>catextentry_4</zorder>
+   <zorder>camessagebutton</zorder>
+   <zorder>camultilinestring</zorder>
+   <zorder>caLabel_46</zorder>
+   <zorder>caLabel_48</zorder>
+   <zorder>camenu</zorder>
+   <zorder>caLabel_47</zorder>
+   <zorder>calineedit</zorder>
+   <zorder>caLabel_49</zorder>
+   <zorder>camenu_2</zorder>
+   <zorder>camultilinestring_2</zorder>
+   <zorder>caLabel_50</zorder>
+   <zorder>caLabel_51</zorder>
+   <zorder>catextentry_5</zorder>
+   <zorder>caframe_9</zorder>
+   <zorder>caLabel_45</zorder>
   </widget>
  </widget>
  <customwidgets>
@@ -624,6 +680,12 @@ caMenu{
    <class>caMessageButton</class>
    <extends>QPushButton</extends>
    <header>caMessageButton</header>
+  </customwidget>
+  <customwidget>
+   <class>caFrame</class>
+   <extends>QFrame</extends>
+   <header>caFrame</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>caLabel</class>

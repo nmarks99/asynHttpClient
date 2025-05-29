@@ -126,7 +126,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)URModule:toggle_gripper.VAL</string>
+     <string notr="true">$(P)UR:ToggleGripper.VAL</string>
     </property>
     <property name="stackingMode" stdset="0">
      <enum>caChoice::Column</enum>

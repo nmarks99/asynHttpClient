@@ -1,19 +1,38 @@
-record(lso, "$(P)set_action_url:getj") {
-    field(DOL, {const: "http://$(HOST)/action?action_name=getj"})
-    field(OUT, "$(P)$(R)FullURL.VAL$ PP")
-    field(SIZV, 2048)
-}
+# record(lso, "$(P)UR:ToggleGripper:set_parser_key") {
+    # field(PINI, 1)
+    # field(DOL, {const: "action_id"})
+    # field(OUT, "$(P)$(R1)JSONParserKey.VAL$ PP")
+    # field(SIZV, 2048)
+# }
 
-record(bo, "$(P)URModule:toggle_gripper") {
+record(bo, "$(P)UR:ToggleGripper") {
     field(ZNAM, "Open")
     field(ONAM, "Close")
-    field(FLNK, "$(P)run_toggle_gripper.PROC")
+    field(FLNK, "$(P)UR:ToggleGripper:set_post_url.PROC")
 }
 
-record(luascript, "$(P)run_toggle_gripper") {
-    field(INPA, "$(P)URModule:toggle_gripper.VAL")
-    field(CODE, "@ur_module.lua get_url_toggle_gripper({prefix='$(P)',host='$(HOST)'})")
+record(luascript, "$(P)UR:ToggleGripper:set_post_url") {
+    field(INPA, "$(P)UR:ToggleGripper.VAL")
+    field(CODE, "@ur_module.lua toggle_gripper_set_post_url({prefix='$(P)',host='$(HOST)'})")
     field(SYNC, "Sync")
-    field(OUT, "$(P)$(R)FullURL.VAL$ PP")
-    field(FLNK, "$(P)$(R)Post.PROC")
+    field(OUT, "$(P)$(R1)FullURL.VAL$ PP")
+    field(FLNK, "$(P)$(R1)Post.PROC")
+}
+
+record(lsi, "$(P)UR:ToggleGripper:ActionID") {
+    field(INP, "$(P)$(R1)JSONParserValue.VAL$ CP")
+    field(FLNK, "$(P)UR:ToggleGripper:set_get_url.PROC")
+}
+
+record(luascript, "$(P)UR:ToggleGripper:set_get_url") {
+    field(INAA, "$(P)UR:ToggleGripper:ActionID.VAL$")
+    field(CODE, "@ur_module.lua toggle_gripper_set_get_url({prefix='$(P)',host='$(HOST)'})")
+    field(SYNC, "Sync")
+    field(OUT, "$(P)$(R2)FullURL.VAL$ PP")
+    field(FLNK, "$(P)$(R2)Get.PROC")
+}
+
+record(luascript, "$(P)UR:ToggleGripper:Running") {
+    field(INAA, "$(P)$(R2)JSONParserValue.VAL$ NPP")
+    field(CODE, "table.concat(AA)=='running' and 1 or 0")
 }

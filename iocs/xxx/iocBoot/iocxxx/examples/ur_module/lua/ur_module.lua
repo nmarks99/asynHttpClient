@@ -19,7 +19,11 @@ function string_to_table(str)
     return chars
 end
 
-function get_url_toggle_gripper(args)
+function string_strip(s)
+    return s:match("^%s*(.-)%s*$")
+end
+
+function toggle_gripper_set_post_url(args)
     local openval
     local closeval
 
@@ -40,8 +44,16 @@ function get_url_toggle_gripper(args)
     local encoded_args = urlencode(json_args)
     full_url = url .. "&args=" .. encoded_args
 
-    io.write("URL: ")
-    print(full_url)
+    -- io.write("URL: ")
+    -- print(full_url)
 
     return string_to_table(full_url)
+end
+
+function toggle_gripper_set_get_url(args)
+    local action_id = string_strip(table.concat(AA))
+    if (#action_id > 0) then
+        local url = string.format("http://%s/action/%s", args.host, action_id)
+        return string_to_table(url)
+    end
 end
