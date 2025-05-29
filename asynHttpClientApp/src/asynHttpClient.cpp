@@ -9,18 +9,12 @@
 #include "cpr/cpr.h"
 #include "nlohmann/json.hpp"
 
-// static void poll_thread_C(void *pPvt) {
-// AsynHttpClient *pAsynHttpClient = (AsynHttpClient *)pPvt;
-// pAsynHttpClient->poll();
-// }
-
 AsynHttpClient::AsynHttpClient(const char *port_name)
-    : asynPortDriver(port_name, MAX_CONTROLLERS,
+    : asynPortDriver(port_name, MAX_ADDR,
                      asynInt32Mask | asynFloat64Mask | asynDrvUserMask | asynOctetMask | asynInt32ArrayMask,
                      asynInt32Mask | asynFloat64Mask | asynOctetMask | asynInt32ArrayMask,
                      ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0) // autoConnect, priority, stackSize
 {
-
     createParam(FULL_URL_STRING, asynParamOctet, &fullUrlIndex_);
     createParam(HTTP_METHOD_STRING, asynParamInt32, &httpMethodIndex_);
     createParam(RESPONSE_STRING, asynParamOctet, &responseIndex_);
@@ -29,26 +23,7 @@ AsynHttpClient::AsynHttpClient(const char *port_name)
     createParam(STATUS_CODE_STRING, asynParamInt32, &statusCodeIndex_);
     createParam(JSON_PARSER_KEY_STRING, asynParamOctet, &jsonParserKeyIndex_);
     createParam(JSON_PARSER_VALUE_STRING, asynParamOctet, &jsonParserValueIndex_);
-
-    // epicsThreadCreate("AsynHttpClientPoller", epicsThreadPriorityLow,
-    // epicsThreadGetStackSize(epicsThreadStackMedium), (EPICSTHREADFUNC)poll_thread_C, this);
 }
-
-// void AsynHttpClient::poll() {
-// while (true) {
-// lock();
-//
-// // if (base_url_.length() > 0 && endpoint_.length() > 0) {
-// // cpr::Response status_resp = cpr::Get(cpr::Url{"http://localhost:8000/users"});
-// // auto status_data = nlohmann::json::parse(status_resp.text);
-// // printf("%s\n", status_data.dump(2).c_str());
-// // }
-//
-// callParamCallbacks();
-// unlock();
-// epicsThreadSleep(poll_time_);
-// }
-// }
 
 std::vector<std::string> get_json_path_keys(const std::string &path) {
     std::vector<std::string> keys;
@@ -73,7 +48,7 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     }
     else if (function == jsonParserKeyIndex_) {
         std::string json_val_out = "";
-        if (!response_json_.empty()) {
+        if (!response_json_.empty() and strlen(value) > 0) {
             std::vector<std::string> keys = get_json_path_keys(value);
 
             nlohmann::json node = response_json_;
@@ -89,6 +64,10 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
 
             if (found) {
                 json_val_out = node.dump(2);
+                if (json_val_out.front() == '"' and json_val_out.back() == '"') {
+                    json_val_out.erase(0,1);
+                    json_val_out.pop_back();
+                }
             } else {
                 asynPrint(pasynUserSelf, ASYN_TRACE_ERROR, "Key '%s' not found in latest JSON response\n", value);
             }

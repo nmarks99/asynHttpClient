@@ -45,6 +45,7 @@ record(lsi, "$(P)$(R)Response") {
     field(INP, "@asyn($(PORT),$(ADDR=0),$(TIMEOUT=1))RESPONSE")
     field(SIZV, 32767)
     field(SCAN, "I/O Intr")
+    field(FLNK, "$(P)$(R)JSONParserKey.PROC")
 }
 
 record(bo, "$(P)$(R)ResponseFormat") {

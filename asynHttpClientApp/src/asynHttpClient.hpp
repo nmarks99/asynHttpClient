@@ -14,8 +14,8 @@ static constexpr char STATUS_CODE_STRING[] = "STATUS_CODE";
 static constexpr char JSON_PARSER_KEY_STRING[] = "JSON_PARSER_KEY";
 static constexpr char JSON_PARSER_VALUE_STRING[] = "JSON_PARSER_VALUE";
 
-constexpr int MAX_CONTROLLERS = 1;
-constexpr double DEFAULT_POLL_TIME = 1.0; // seconds
+// HACK: should be a argument to constructor?
+constexpr int MAX_ADDR = 10;
 
 enum class HTTPMethod {
     GET,
@@ -33,7 +33,6 @@ enum class HTTPMethod {
 class AsynHttpClient : public asynPortDriver {
   public:
     AsynHttpClient(const char *port_name);
-    // virtual void poll(void);
     virtual asynStatus writeInt32(asynUser *pasynUser, epicsInt32 value);
     virtual asynStatus writeOctet(asynUser *pasynUser, const char *value, size_t maxChars, size_t *nActual);
 
