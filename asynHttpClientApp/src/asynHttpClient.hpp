@@ -4,8 +4,8 @@
 #include <asynPortDriver.h>
 #include "nlohmann/json.hpp"
 
-static constexpr char FULL_URL_STRING[] = "FULL_URL";
-static constexpr char HTTP_METHOD_STRING[] = "HTTP_METHOD";
+static constexpr char URL_STRING[] = "URL";
+static constexpr char METHOD_STRING[] = "METHOD";
 static constexpr char RESPONSE_STRING[] = "RESPONSE";
 static constexpr char RESPONSE_FORMAT_STRING[] = "RESPONSE_FORMAT";
 static constexpr char EXECUTE_STRING[] = "EXECUTE";
@@ -42,8 +42,8 @@ class AsynHttpClient : public asynPortDriver {
 
   protected:
     asynUser *pasynUserAsynHttpClient_;
-    int fullUrlIndex_;
-    int httpMethodIndex_;
+    int urlIndex_;
+    int methodIndex_;
     int responseIndex_;
     int responseFormatIndex_;
     int executeIndex_;

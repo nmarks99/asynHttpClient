@@ -1,40 +1,59 @@
 # APS: "41.703513,-87.9887717"
-record(ao, "$(P)Latitude") {
+record(ao, "$(P)$(W=)Latitude") {
     field(VAL, "41.703513")
     field(PREC, 7)
 }
 
-record(ao, "$(P)Longitude") {
+record(ao, "$(P)$(W=)Longitude") {
     field(VAL, "-87.9887717")
     field(PREC, 7)
 }
 
-record(luascript, "$(P)get_forecast_url") {
-    field(INPA, "$(P)Latitude.VAL CP")
-    field(INPB, "$(P)Longitude.VAL CP")
+record(bo, "$(P)$(W=)Update") {
+    field(PINI, 1)
+    field(FLNK, "$(P)$(W=)get_updates.PROC")
+}
+
+record(fanout, "$(P)$(W=)get_updates") {
+    field(LNK0, "$(P)$(W=)get_forecast.PROC")
+    field(LNK1, "$(P)$(W=)get_last_updated.PROC")
+}
+
+record(luascript, "$(P)$(W=)get_last_updated") {
+    field(CODE, "return os.date('%Y-%m-%d %H:%M:%S')")
+    field(OUT, "$(P)LastUpdated.VAL PP")
+}
+
+record(stringin, "$(P)$(W=)LastUpdated") {
+    field(DESC, "Date/time when last updated")
+}
+
+record(luascript, "$(P)$(W=)get_forecast") {
+    field(INPA, "$(P)$(W=)Latitude.VAL CP")
+    field(INPB, "$(P)$(W=)Longitude.VAL CP")
     field(CODE, "@weather.lua set_points_url()")
     field(SYNC, "Sync")
-    field(OUT, "$(P)$(R1)FullURL.VAL$ PP")
+    field(OUT, "$(P)$(R1)URL.VAL$ PP")
     field(FLNK, "$(P)$(R1)Get.PROC")
 }
 
-record(lso, "$(P)get_daily_forecast") {
+record(lso, "$(P)$(W=)get_bidaily_forecast") {
     field(DOL, "$(P)$(R1)JSONParserValue.VAL$ CP")
     field(OMSL, "closed_loop")
-    field(OUT, "$(P)$(R2)FullURL.VAL$ PP")
+    field(OUT, "$(P)$(R2)URL.VAL$ PP")
     field(FLNK, "$(P)$(R2)Get.PROC")
     field(SIZV, 2048)
 }
 
-record(luascript, "$(P)get_hourly_forecast") {
-    field(INAA, "$(P)$(R1)JSONParserValue.VAL$ CP")
-    field(CODE, "@weather.lua set_hourly_url()")
-    field(OUT, "$(P)$(R3)FullURL.VAL$ PP")
-    field(FLNK, "$(P)$(R3)Get.PROC")
-}
-
-record(luascript, "$(P)parse_daily_forecast") {
+record(luascript, "$(P)$(W=)parse_bidaily_forecast") {
     field(INAA, "$(P)$(R2)JSONParserValue.VAL$ CP")
-    field(CODE, "@weather.lua parse_weekly_forecast({P='$(P)'})")
+    field(CODE, "@weather.lua parse_bidaily_forecast({P='$(P)'})")
     field(SYNC, "Async")
 }
+
+# record(luascript, "$(P)get_hourly_forecast") {
+    # field(INAA, "$(P)$(R1)JSONParserValue.VAL$ CP")
+    # field(CODE, "@weather.lua set_hourly_url()")
+    # field(OUT, "$(P)$(R3)URL.VAL$ PP")
+    # field(FLNK, "$(P)$(R3)Get.PROC")
+# }

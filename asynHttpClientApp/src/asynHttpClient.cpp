@@ -14,8 +14,8 @@ AsynHttpClient::AsynHttpClient(const char *port_name)
                      asynInt32Mask | asynFloat64Mask | asynOctetMask | asynInt32ArrayMask,
                      ASYN_MULTIDEVICE | ASYN_CANBLOCK, 1, 0, 0) // autoConnect, priority, stackSize
 {
-    createParam(FULL_URL_STRING, asynParamOctet, &fullUrlIndex_);
-    createParam(HTTP_METHOD_STRING, asynParamInt32, &httpMethodIndex_);
+    createParam(URL_STRING, asynParamOctet, &urlIndex_);
+    createParam(METHOD_STRING, asynParamInt32, &methodIndex_);
     createParam(RESPONSE_STRING, asynParamOctet, &responseIndex_);
     createParam(RESPONSE_FORMAT_STRING, asynParamInt32, &responseFormatIndex_);
     createParam(EXECUTE_STRING, asynParamInt32, &executeIndex_);
@@ -44,8 +44,8 @@ asynStatus AsynHttpClient::writeOctet(asynUser *pasynUser, const char *value, si
     int addr;
     getAddress(pasynUser, &addr);
 
-    if (function == fullUrlIndex_) {
-        setStringParam(addr, fullUrlIndex_, value);
+    if (function == urlIndex_) {
+        setStringParam(addr, urlIndex_, value);
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting URL to %s\n", value);
     }
     else if (function == jsonParserKeyIndex_) {        
@@ -98,13 +98,13 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
 
     if (function == executeIndex_) {
         std::string full_url;
-        getStringParam(addr, fullUrlIndex_, full_url);
+        getStringParam(addr, urlIndex_, full_url);
 
         if (full_url.length() > 0) {
             cpr::Response response;
 
             int method;
-            getIntegerParam(addr, httpMethodIndex_, &method);
+            getIntegerParam(addr, methodIndex_, &method);
             switch (static_cast<HTTPMethod>(method)) {
             case HTTPMethod::GET:
                 response = cpr::Get(cpr::Url{full_url});
@@ -168,9 +168,9 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
         }
     }
 
-    else if (function == httpMethodIndex_) {
+    else if (function == methodIndex_) {
         asynPrint(pasynUserSelf, ASYN_TRACEIO_DRIVER, "Setting HTTP method to %d\n", value);
-        setIntegerParam(addr, httpMethodIndex_, value);
+        setIntegerParam(addr, methodIndex_, value);
     }
 
     else if (function == responseFormatIndex_) {

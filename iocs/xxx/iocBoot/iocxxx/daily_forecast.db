@@ -1,6 +1,0 @@
-record(stringout, "$(P)Forecast$(N):Name") {}
-record(stringout, "$(P)Forecast$(N)") {}
-record(longout, "$(P)Forecast$(N):ProbPrecip") {}
-record(longout, "$(P)Forecast$(N):Temperature") {}
-record(stringout, "$(P)Forecast:WindDirection") {}
-record(stringout, "$(P)Forecast:WindSpeed") {}

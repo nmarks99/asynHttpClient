@@ -126,7 +126,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)$(R)FullURL.VAL$</string>
+     <string notr="true">$(P)$(R)URL.VAL$</string>
     </property>
     <property name="background">
      <color>
@@ -332,7 +332,7 @@ caMenu{
      </rect>
     </property>
     <property name="channel" stdset="0">
-     <string notr="true">$(P)$(R)HTTPMethod</string>
+     <string notr="true">$(P)$(R)Method</string>
     </property>
     <property name="colorMode">
      <enum>caMenu::Static</enum>

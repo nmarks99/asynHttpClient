@@ -12,7 +12,7 @@ dbLoadTemplate("requests.substitutions", "P=$(PREFIX),PORT=client1")
 
 epicsEnvSet("LUA_SCRIPT_PATH", ".")
 dbLoadRecords("weather.db", "P=$(PREFIX),R1=Req1:,R2=Req2:,R3=Req3:")
-dbLoadTemplate("weekly.substitutions", "P=$(PREFIX)")
+dbLoadTemplate("bidaily.substitutions", "P=$(PREFIX)")
 
 ###############################################################################
 iocInit

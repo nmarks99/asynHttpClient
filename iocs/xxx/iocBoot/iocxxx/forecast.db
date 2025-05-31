@@ -1,6 +1,24 @@
-record(stringout, "$(P)Forecast$(N):Name") {}
-record(stringout, "$(P)Forecast$(N)") {}
-record(stringout, "$(P)Forecast$(N):ProbPrecip") {}
-record(ao, "$(P)Forecast$(N):Temperature") {}
-# record(stringout, "$(P)Forecast:WindDirection") {}
-# record(stringout, "$(P)Forecast:WindSpeed") {}
+record(stringin, "$(P)Forecast$(N):Name") {
+    field(DESC, "String name of the forecast")
+}
+
+record(stringin, "$(P)Forecast$(N):Short") {
+    field(DESC, "Short forecast")
+}
+
+record(longin, "$(P)Forecast$(N):ProbPrecip") {
+    field(DESC, "Percentage chance of rain")
+    field(EGU, "%")
+}
+
+record(longin, "$(P)Forecast$(N):Temperature") {}
+
+record(stringout, "$(P)Forecast$(N):TemperatureUnit") {
+    field(OUT, "$(P)Forecast$(N):Temperature.EGU PP")
+}
+
+record(stringin, "$(P)Forecast$(N):WindDir") {
+}
+
+record(stringin, "$(P)Forecast$(N):WindSpeed") {
+}
