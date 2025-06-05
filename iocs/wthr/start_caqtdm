@@ -6,6 +6,6 @@ if [ "" == "${EPICS_CA_MAX_ARRAY_BYTES}" ]; then
 fi
 echo "Using EPICS_CA_MAX_ARRAY_BYTES = ${EPICS_CA_MAX_ARRAY_BYTES}"
 
-export CAQTDM_DISPLAY_PATH=${CAQTDM_DISPLAY_PATH}:"../../../../asynHttpClientApp/op/ui"
+export CAQTDM_DISPLAY_PATH=${CAQTDM_DISPLAY_PATH}:"wthrApp/op/ui"
 
-/APSshare/bin/caQtDM -macro "P=xxx:,W=" weather.ui &
+/APSshare/bin/caQtDM -macro "P=wthr:,W=" weather.ui &

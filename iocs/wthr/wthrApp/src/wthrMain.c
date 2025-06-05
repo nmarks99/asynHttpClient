@@ -1,4 +1,4 @@
-/* xxxMain.c */
+/* wthrMain.c */
 /* Author:  Ron Sluiter */
 
 #include <stddef.h>

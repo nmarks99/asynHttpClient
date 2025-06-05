@@ -1,9 +1,4 @@
--- Correct path to ASYN_HTTP_CLIENT
-local ASYN_HTTP_CLIENT = "/home/beams/NMARKS/devel/asynHttpClient/"
-package.path = ASYN_HTTP_CLIENT .. "asynHttpClientApp/src/lua/?.lua;" .. package.path
-
 epics = require("epics")
-osi = require("osi")
 json = require("lunajson")
 
 local function urlencode(str)
