@@ -120,3 +120,8 @@ function set_url(args)
 end
 ```
 
+## GUI
+A simple caQtDM screen is provided for debugging HTTP requests:
+![image](https://github.com/user-attachments/assets/f5ff36ec-3406-4649-ad27-ef182e13c310)
+
+
