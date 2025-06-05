@@ -4,10 +4,10 @@
 ##############################################################################
 
 ASYN =
-EPICS_BASE = 
+EPICS_BASE =
 
-CPR_INCLUDE_DIR = /home/beams/NMARKS/.local/include
-CPR_LIB_DIR = /home/beams/NMARKS/.local/lib64
+CPR_INCLUDE_DIR =
+CPR_LIB_DIR =
 
 # These lines allow developers to override these RELEASE settings
 # without having to modify this file directly.

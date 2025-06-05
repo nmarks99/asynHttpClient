@@ -154,7 +154,6 @@ asynStatus AsynHttpClient::writeInt32(asynUser *pasynUser, epicsInt32 value) {
                 nlohmann::json json_data;
                 try {
                     json_data = nlohmann::json::parse(response.text);
-                    // response_json_ = json_data;
                     json_response_map_.insert_or_assign(addr, json_data);
                     response_str = json_data.dump(2);
                 } catch (const std::exception &e) {
